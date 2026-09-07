@@ -1,0 +1,1 @@
+<h2><a href=https://www.codewars.com/kata/5168bb5dfe9a00b126000018/train/csharp/69b42ae29ca1327e07d561d5 target="_blank">Reversed Strings</a></h2><h3>8 kyu</h3><p>Complete the solution so that it reverses the string passed into it. </p><pre><code>'world'  =&gt;  'dlrow''word'   =&gt;  'drow'</code></pre>
