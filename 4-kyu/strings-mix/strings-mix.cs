@@ -1,23 +1,3 @@
-using System;
-using System.Linq;
-using System.Collections.Generic;
-​
-public class Mixing 
-{
-  public static string Mix(string s1, string s2)
-  {
-    Dictionary<char, int> s1Count = new();
-    Dictionary<char, int> s2Count = new();
-    // Iterating through both strings and adding lowercased chars to dictionaries
-    foreach(char character in s1){
-      if(char.IsLower(character)){
-        if (s1Count.ContainsKey(character))
-        {
-            s1Count[character]++;
-        }
-        else
-        {
-            s1Count.Add(character, 1);
         }
       }
     }
@@ -29,3 +9,41 @@ public class Mixing
             s2Count[character]++;
         }
         else
+        {
+            s2Count.Add(character, 1);
+        }
+      }
+    }
+    
+    // Storing the individual results
+    List<string> results = new();
+    
+    //iterating through every letter A-Z
+    for(char letter = 'a'; letter <= 'z'; letter++){
+      int count1 = s1Count.ContainsKey(letter) ? s1Count[letter] : 0;
+      int count2 = s2Count.ContainsKey(letter) ? s2Count[letter] : 0;
+      
+      int max = Math.Max(count1, count2);
+      
+      // ignore if the letter only occurs once
+      if(max <= 1) continue;
+      
+      string letters = new string(letter, max);
+      
+      if(count1 > count2){
+        results.Add("1:" + letters);
+      } else if(count2 > count1){
+        results.Add("2:" + letters);
+      } else {
+        results.Add("=:" +letters);
+      }
+    }
+    
+    results = results
+        .OrderByDescending(x => x.Length)
+        .ThenBy(x => x, StringComparer.Ordinal)
+        .ToList();
+    
+    return string.Join("/", results);
+  }
+}
